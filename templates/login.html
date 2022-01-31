@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body{
+                background-color: lightcyan;
+                color: black;
+                padding-top: 300px;
+                padding-bottom: 50px;
+                padding-right: 30px;
+                padding-left: 400px;
+            }
+            .submit{
+                background-color: rgb(43,100,43);
+                padding:auto;
+                height:40px;
+                width:80px;
+                font-weight: bold;
+                margin-left: 10px;
+                border-radius: 10px;
+            }
+            .input{
+                height: 40px;
+                font-weight: bolder;
+                border-radius: 10px;
+                margin-left: 10px;
+            }
+        </style>
+        <title>Login</title>
+    </head>
+    <body>
+        <form action="/login" method='POST'>
+            <input type="text" class='input' name='username' placeholder="Enter Username">
+            <input type="password" class="input" name="password" placeholder="Enter Password">
+            <input type="submit" class="submit" value="Login">
+
+        </form>
+    </body>
+</html>
