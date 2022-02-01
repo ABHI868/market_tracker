@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import request,jsonify
-from settings import SECRET_KEY
+from market_tracker.settings import SECRET_KEY
 import jwt
 
 def check_for_token(f):

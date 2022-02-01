@@ -1,7 +1,8 @@
-from middlewares.auth import check_for_token
-from flask import request,Blueprint
+
+from market_tracker.middlewares.auth import check_for_token
+from flask import request,Blueprint,Response,json
 import requests
-from constants import GET_MARKET_SUMMARIES,GET_MARKET_DETAILS
+from market_tracker.constants import GET_MARKET_SUMMARIES,GET_MARKET_DETAILS
 
 market_apis=Blueprint('market_apis',__name__)
 
@@ -15,5 +16,6 @@ def market_summary():
 @check_for_token
 def get_market_details():
     params={key:request.args.get(key) for key in request.args.keys()}
-    response=requests.post(url=GET_MARKET_DETAILS,params=params).json()
-    return response
+    data=requests.post(url=GET_MARKET_DETAILS,params=params).json()
+    if not data['success']:
+        return Response(json.dumps({"message":"Unauthorized Access"}), status=401)

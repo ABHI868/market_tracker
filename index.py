@@ -1,22 +1,19 @@
-from flask import Flask,request,session,render_template,jsonify
+from flask import Flask,request,session,render_template,jsonify,Blueprint
 import jwt
 from datetime import datetime,timedelta
-from settings import SECRET_KEY
-from views.market_api import market_apis
+from .settings import SECRET_KEY
 
-app=Flask(__name__)
-app.register_blueprint(market_apis)
-app.config['SECRET_KEY']=SECRET_KEY
-app.config['PROPAGATE_EXCEPTIONS']=True
+main = Blueprint('index',__name__)
 
-@app.route('/home')
+@main.route('/')
+@main.route('/home')
 def index():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
         return "You are already Logged In"
 
-@app.route('/login',methods=['POST'])
+@main.route('/login',methods=['POST'])
 def login():
     username=request.form.get('username',None)
     password=request.form.get('password',None)
