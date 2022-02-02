@@ -1,18 +1,23 @@
 from functools import wraps
-from flask import request,jsonify
+from flask import request,jsonify,Response
 from market_tracker.settings import SECRET_KEY
-import jwt
+import jwt,json,os
+
 
 def check_for_token(f):
     @wraps(f)
     def wrapped(*args, **kwargs):
-        token=request.headers.get('x-api-token') if request.cookies.get('x-api-token') is None \
+        token = request.headers.get('x-api-token') if request.cookies.get('x-api-token') is None \
                 else request.cookies.get('x-api-token')
         if not token:
-            return jsonify({"message":"Token is Missing"},401)
+            data={"message":"Token is Missing",'success':'False'}
+            return Response(json.dumps(data), status=400)
         try:
-            jwt.decode(token,SECRET_KEY,'HS256')
+            c=jwt.decode(token,SECRET_KEY,'HS256')
+
         except:
-            return jsonify({'message':"Invalid Token" }, 401)
+            data ={'message':"Invalid Token",'success':'False'}
+            return Response(json.dumps(data),status=401)
+            
         return f(*args, **kwargs)
     return wrapped

@@ -9,8 +9,8 @@ market_apis=Blueprint('market_apis',__name__)
 @market_apis.route("/market_summaries")
 @check_for_token
 def market_summary():
-    response=requests.get(GET_MARKET_SUMMARIES).json()
-    return response
+    data=requests.get(GET_MARKET_SUMMARIES).json()
+    return data
 
 @market_apis.route('/getmarketsummary',methods=['POST'])
 @check_for_token
