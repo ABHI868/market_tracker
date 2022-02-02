@@ -15,7 +15,10 @@ def market_summary():
 @market_apis.route('/getmarketsummary',methods=['POST'])
 @check_for_token
 def get_market_details():
-    params={key:request.args.get(key) for key in request.args.keys()}
-    data=requests.post(url=GET_MARKET_DETAILS,params=params).json()
-    if not data['success']:
-        return Response(json.dumps({"message":"Unauthorized Access"}), status=401)
+    try:
+        params={key:request.args.get(key) for key in request.args.keys()}
+        data=requests.post(url=GET_MARKET_DETAILS,params=params).json()
+        status =200 if data.get('success') else 400
+    except Exception as e:
+            data['error_msg']=str(e)
+    return Response(json.dumps(data), status=status or 400)
