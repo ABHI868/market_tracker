@@ -11,11 +11,3 @@ def create_app():
     app.register_blueprint(market_api_blueprint)
     app.config['SECRET_KEY']=SECRET_KEY
     return app
-
-
-# spec=APISpec(
-#     'title': 'flask-api-swagger',
-#     'version':'1.0.0',
-#     'openapi_version':'1.0.2',
-#     'plugins':[]
-# )

@@ -23,5 +23,5 @@ def test_marketdetails_invalidmethod(client):
 
 def test_index(client):
     ''' This to verify index page'''
-    mock_paylod={"username":"Abhishek","password":"@admin123"}
+    # mock_paylod={"username":"Abhishek","password":"@admin123"}
     assert client.get(url_for('index.index')).status_code == 200

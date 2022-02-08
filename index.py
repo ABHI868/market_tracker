@@ -8,6 +8,7 @@ main = Blueprint('index',__name__)
 @main.route('/')
 @main.route('/home')
 def index():
+    ''' This function will render Default page '''
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
@@ -15,7 +16,8 @@ def index():
 
 @main.route('/login',methods=['POST'])
 def login():
-
+    ''' This function will allow user to login and generate a JWT token for \
+        authentication in further api calls'''
     username=request.form.get('username','Abhishek')
     password=request.form.get('password',None)
 
