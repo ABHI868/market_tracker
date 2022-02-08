@@ -5,7 +5,6 @@ from .settings import SECRET_KEY
 
 main = Blueprint('index',__name__)
 
-@main.route('/')
 @main.route('/home')
 def index():
     ''' This function will render Default page '''
