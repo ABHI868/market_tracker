@@ -1,0 +1,146 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Market Tracker API",
+      "description": "Ths is to track all the live market data",
+      "contact": {
+        "email": "abhishek.tripathi@ltts.com"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000/api/v1",
+        "description": "Dev server (uses live data)"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Market Details",
+        "description": "Track Live Market"
+      },
+      {
+        "name": "User",
+        "description": ":User Auth"
+      }
+    ],
+    "paths": {
+      "/login": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Logs user into the system",
+          "parameters": [
+            {
+              "name": "username",
+              "in": "query",
+              "description": "The user name for login",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "password",
+              "in": "query",
+              "description": "The password for login in clear text",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "login Successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username/password supplied",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/market_summaries": {
+        "get": {
+          "tags": [
+            "Market Details"
+          ],
+          "summary": "Get Market Summary",
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username/password supplied",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/getmarketsummary": {
+        "post": {
+          "tags": [
+            "Market Details"
+          ],
+          "summary": "Get Market Details",
+          "parameters": [
+            {
+              "name": "market",
+              "in": "query",
+              "description": "Gives details if the market passed in the request",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid Payload",
+              "content": {}
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "ApiKeyAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "x-api-token"
+        }
+      }
+    },
+    "security": [
+      {
+        "ApiKeyAuth": []
+      }
+    ]
+  }
