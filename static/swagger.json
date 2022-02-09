@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
       "title": "Market Tracker API",
-      "description": "Ths is to track all the live market data",
+      "description": "Ths is to track  live market data",
       "contact": {
         "email": "abhishek.tripathi@ltts.com"
       },
@@ -11,7 +11,7 @@
     "servers": [
       {
         "url": "http://localhost:5000/api/v1",
-        "description": "Dev server (uses live data)"
+        "description": "Dev server"
       }
     ],
     "tags": [
@@ -21,7 +21,7 @@
       },
       {
         "name": "User",
-        "description": ":User Auth"
+        "description": ":User Authentication"
       }
     ],
     "paths": {
@@ -30,7 +30,7 @@
           "tags": [
             "User"
           ],
-          "summary": "Logs user into the system",
+          "summary": "Logs user into the system and generate JWT token",
           "parameters": [
             {
               "name": "username",
@@ -57,7 +57,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Auth"
                   }
                 }
               }
@@ -81,14 +81,18 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Tracker"
                   }
                 }
               }
             },
             "400": {
-              "description": "Invalid username/password supplied",
+              "description": "Token is missing",
               "content": {}
+            },
+            "401": {
+                "description": "Invalid token passed",
+                "content": {}
             }
           }
         }
@@ -116,13 +120,13 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Tracker"
                   }
                 }
               }
             },
             "400": {
-              "description": "Invalid Payload",
+              "description": "Invalid Market Detail",
               "content": {}
             }
           }
@@ -135,6 +139,89 @@
           "type": "apiKey",
           "in": "header",
           "name": "x-api-token"
+        }
+      },
+      "schemas": {
+        "Auth": {
+          "type": "object",
+          "properties": {
+            "x-api-token": {
+              "type": "string",
+              "example": "JWT-Token"
+            }
+          }
+        },
+        "Tracker": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Ask": {
+                "type": "number",
+                "format": "double",
+                "example": 0.00069307
+              },
+              "BaseVolume": {
+                "type": "number",
+                "format": "double",
+                "example": 4.63904826
+              },
+              "Bid": {
+                "type": "number",
+                "format": "float",
+                "example": 0.00069204
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2019-04-23T17:44:01.423"
+              },
+              "High": {
+                "type": "number",
+                "format": "double",
+                "example": 0.00070473
+              },
+              "Last": {
+                "type": "number",
+                "format": "double",
+                "example": 0.00069047
+              },
+              "Low": {
+                "type": "number",
+                "format": "double",
+                "example": 0.000685
+              },
+              "MarketName": {
+                "type": "string",
+                "example": "BTS-ATOM"
+              },
+              "OpenBuyOrders": {
+                "type": "integer",
+                "format": "int64",
+                "example": 433
+              },
+              "OpenSellOrders": {
+                "type": "integer",
+                "format": "int64",
+                "example": 500
+              },
+              "PrevDay": {
+                "type": "number",
+                "format": "float",
+                "example": 0.00070364
+              },
+              "Timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2022-02-09T08:46:09.673"
+              },
+              "Volume": {
+                "type": "number",
+                "format": "double",
+                "example": 6706.2046843
+              }
+            }
+          }
         }
       }
     },
