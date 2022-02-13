@@ -7,7 +7,7 @@ from flask_restful import Resource,Api
 main = Blueprint('index',__name__)
 api=Api(main)
 
-class Hello(Resource):
+class Home(Resource):
     def get(self):
         ''' This function will render Default page '''
         if not session.get('logged_in'):
@@ -16,7 +16,6 @@ class Hello(Resource):
         else:
             return "You are already Logged In"
 
-api.add_resource(Hello, '/home')
 
 class Login(Resource):
     def post(self):
@@ -31,3 +30,5 @@ class Login(Resource):
         return response
 
 api.add_resource(Login,'/login')
+api.add_resource(Home, '/home')
+

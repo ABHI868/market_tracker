@@ -12,7 +12,7 @@ def create_app():
     cors = CORS(app)
 
     # SWAGGER CONFIG
-    SWAGGER_URL = '/swagger'
+    SWAGGER_URL = '/api/v1/swagger'
     API_URL = '/static/swagger.json'
     SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
         SWAGGER_URL,API_URL,
