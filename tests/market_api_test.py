@@ -32,7 +32,6 @@ def test_valid_marketdetails_invalid_payload(client):
     assert json.loads(response.data)['message'] == 'MARKET_NOT_PROVIDED'
     assert json.loads(response.data)['success'] == False 
 
-
 def test_home(client):
     ''' This to verify index page'''
     # mock_paylod={"username":"Abhishek","password":"@admin123"}
