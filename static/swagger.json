@@ -69,7 +69,7 @@
           }
         }
       },
-      "/market_summaries": {
+      "/market_summary": {
         "get": {
           "tags": [
             "Market Details"
@@ -96,13 +96,12 @@
             }
           }
         }
-      },
-      "/getmarketsummary": {
+      ,
         "post": {
           "tags": [
             "Market Details"
           ],
-          "summary": "Get Market Details",
+          "summary": "Get Market Detailed Info",
           "parameters": [
             {
               "name": "market",
