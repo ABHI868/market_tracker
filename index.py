@@ -21,10 +21,10 @@ class Login(Resource):
     def post(self):
         ''' This function will allow user to login and generate a JWT token for \
         authentication in further api calls'''
-        username=request.form.get('username','Abhishek')
-        password=request.form.get('password',None)
+        username=request.form.get('username')
+        password=request.form.get('password')
         jwt_token=jwt.encode({'user':username,'exp':datetime.utcnow()+timedelta(minutes=30)},SECRET_KEY)
-        response =jsonify({'x-api-token':jwt_token})
+        response =jsonify({'x-api-token':jwt_token,'success': True,'message':'Logged in Successfully'})
         response.set_cookie('x-api-token',jwt_token)    #Saving token inside cookie to protect from XSS attacks
         session["logged_in"]=True
         return response
